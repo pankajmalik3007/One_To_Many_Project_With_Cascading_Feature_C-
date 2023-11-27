@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "O_T_M_POPUP_WITHCASCADE_SP", "O_T_M_POPUP_WITHCASCADE_SP\O_T_M_POPUP_WITHCASCADE_SP.csproj", "{034CD517-F224-454C-8C40-E0D20327EF8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8E5DF974-5619-433F-A98E-C411611158CC}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{034CD517-F224-454C-8C40-E0D20327EF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{034CD517-F224-454C-8C40-E0D20327EF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{034CD517-F224-454C-8C40-E0D20327EF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{034CD517-F224-454C-8C40-E0D20327EF8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {108F89B5-E2E1-46A5-9EE7-1B4AA4ACE5B2}
+	EndGlobalSection
+EndGlobal

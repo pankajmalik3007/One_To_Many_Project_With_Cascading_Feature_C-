@@ -1,0 +1,224 @@
+﻿@model O_T_M_POPUP_WITHCASCADE_SP.Models.Employee
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.Emp_ID" onsubmit="return jQueryAjaxPost(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Emp_ID" />
+            @*<div class="form-group">
+                <label asp-for="Emp_ID" class="control-label" for="Emp_Name">Employee Name</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input asp-for="Emp_ID" class="form-control" id="Emp_Name" />
+                </div>
+                <span asp-validation-for="Emp_ID" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Emp_name" class="control-label" for="Emp_Name">Employee Name</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input asp-for="Emp_name" class="form-control" id="Emp_Name" />
+                </div>
+                <span asp-validation-for="Emp_name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label" for="Sallary">Salary</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input asp-for="Gender" class="form-control" id="Sallary" />
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Sallary" class="control-label" for="Sallary">Salary</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input asp-for="Sallary" class="form-control" id="Sallary" />
+                </div>
+                <span asp-validation-for="Sallary" class="text-danger"></span>
+            </div>
+
+           
+
+            <div class="form-group">
+                <label asp-for="Dep_ID" class="control-label" for="Dept_Id">Department Name</label>
+                <select asp-for="Dep_ID" asp-items="ViewBag.Dep_ID" class="form-control" id="Dept_Id"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryId" class="control-label" for="countryDropdown">Country Name</label>
+                <select asp-for="CountryId" asp-items="ViewBag.CountryId" class="form-control" id="countryDropdown">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StateId" class="control-label" for="stateDropdown">State Name</label>
+                <select asp-for="StateId" asp-items="ViewBag.StateId" class="form-control" id="stateDropdown">
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="CityId" class="control-label" for="cityDropdown">City Name</label>
+                <select asp-for="CityId" class="form-control" id="cityDropdown"></select>
+
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+@*<script>
+    $(document).ready(function () {
+        // Handle change event of the state dropdown
+        $('#stateDropdown').change(function () {
+            var selectedStateId = $(this).val();
+            // Fetch cities based on the selected state
+            $.get('/Employee/GetCitiesByState', { stateId: selectedStateId }, function (data) {
+                // Populate the city dropdown with fetched cities
+                $('#cityDropdown').empty();
+                $.each(data, function (index, city) {
+                    $('#cityDropdown').append($('<option>', {
+                        value: city.cityId,
+                        text: city.cityName
+                    }));
+                });
+            });
+        });
+    });
+</script>*@
+@*$(document).ready(function () {
+    // This code runs when the document is fully loaded and ready to be manipulated.
+
+    // Handle change event of the state dropdown
+    $('#stateDropdown').change(function () {
+        // This function is triggered when the state dropdown selection changes.
+
+        // Get the selected state's ID from the state dropdown
+        var selectedStateId = $(this).val();
+
+        // Send an AJAX GET request to the server-side endpoint '/Employee/GetCitiesByState'
+        // with the selected state's ID as a parameter
+        $.get('/Employee/GetCitiesByState', { stateId: selectedStateId }, function (data) {
+            // This function is a callback that handles the response from the server.
+
+            // Clear all existing options in the city dropdown
+            $('#cityDropdown').empty();
+
+            // Iterate over the data received from the server (presumably an array of cities)
+            $.each(data, function (index, city) {
+                // For each city in the data, create a new <option> element
+                // with cityId as the 'value' attribute and cityName as the visible text
+                $('#cityDropdown').append($('<option>', {
+                    value: city.cityId,
+                    text: city.cityName
+                }));
+            });
+        });
+    });
+});*@
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        // Set initial options for country, state, and city dropdowns
+        $('#countryDropdown').append($('<option>', {
+            value: '',
+            text: 'Select Country',
+            disabled: true,
+            selected: true // Set this option as selected initially
+        }));
+        $('#stateDropdown').prop('disabled', true).append($('<option>', {
+            value: '',
+            text: 'Select State',
+            disabled: true,
+            selected: true // Set this option as selected initially
+        }));
+        $('#cityDropdown').prop('disabled', true).append($('<option>', {
+            value: '',
+            text: 'Select City',
+            disabled: true,
+            selected: true // Set this option as selected initially
+        }));
+
+        // Function to fetch and populate states based on the selected country
+        function populateStates() {
+            var selectedCountryId = $('#countryDropdown').val();
+            if (selectedCountryId) {
+                // Fetch and populate states based on the selected country
+                $.get('/Employee/GetStatesByCountry', { countryId: selectedCountryId }, function (data) {
+                    // Populate the state dropdown with fetched states
+                    $('#stateDropdown').empty().prop('disabled', false);
+                    $('#cityDropdown').empty().prop('disabled', true);
+                    $('#stateDropdown').append($('<option>', {
+                        value: '',
+                        text: 'Select State',
+                        disabled: true,
+                        selected: true
+                    }));
+                    $.each(data, function (index, state) {
+                        $('#stateDropdown').append($('<option>', {
+                            value: state.stateId,
+                            text: state.stateName
+                        }));
+                    });
+                });
+            } else {
+                // If no country is selected, disable state and city dropdowns
+                $('#stateDropdown').prop('disabled', true).val('');
+                $('#cityDropdown').prop('disabled', true).val('');
+            }
+        }
+
+        // Function to fetch and populate cities based on the selected state
+        function populateCities() {
+            var selectedStateId = $('#stateDropdown').val();
+            if (selectedStateId) {
+                // Fetch and populate cities based on the selected state
+                $.get('/Employee/GetCitiesByState', { stateId: selectedStateId }, function (data) {
+                    // Populate the city dropdown with fetched cities
+                    $('#cityDropdown').empty().prop('disabled', false);
+                    $('#cityDropdown').append($('<option>', {
+                        value: '',
+                        text: 'Select City',
+                        disabled: true,
+                        selected: true
+                    }));
+                    $.each(data, function (index, city) {
+                        $('#cityDropdown').append($('<option>', {
+                            value: city.cityId,
+                            text: city.cityName
+                        }));
+                    });
+                });
+            } else {
+                // If no state is selected, disable city dropdown
+                $('#cityDropdown').prop('disabled', true).val('');
+            }
+        }
+
+        // Handle change event of the country dropdown
+        $('#countryDropdown').change(populateStates);
+
+        // Handle change event of the state dropdown
+        $('#stateDropdown').change(populateCities);
+    });
+
+
+</script>
